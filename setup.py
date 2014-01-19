@@ -2,8 +2,12 @@
 
 from distutils.core import setup
 from distutils.extension import Extension
-from Cython.Distutils import build_ext
 import numpy
+
+try:
+    from Cython.Distutils import build_ext
+except ImportError:
+    from distutils.command import build_ext
 
 setup( name = 'OPQ',
        version = '0.1',

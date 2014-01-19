@@ -22,6 +22,8 @@ def clencurt(int N1):
 
     http://www.sam.math.ethz.ch/~waldvoge/Papers/fejer.pdf
     """
+    if N<1:
+        raise ValueError('Quadrature rule must have at least one point')   
 
     cdef int N = N1-1
     cdef np.ndarray[DTYPE_t,ndim=1] x
@@ -29,9 +31,9 @@ def clencurt(int N1):
     cdef np.ndarray[DTYPE_t,ndim=2] C
     cdef np.ndarray[DTYPE_t,ndim=1] k
  
-    if N1 == 1:
-        x = 0
-        w = 2
+    if N1 == 1: # Midpoint rule
+        x = np.array([0.0])
+        w = np.array([2.0])
     else:    
         C = np.zeros((N1,2),DTYPE)
         k = 2.0*(1.0+np.arange(np.floor(0.5*N)))

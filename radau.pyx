@@ -31,7 +31,8 @@ def radau(np.ndarray[DTYPE_t,ndim=1] alpha,
         eigenvalue problems" by Gene Golub, SIAM Review Vol 15, 
         No. 2, April 1973, pp.318--334
     """
-
+    if alpha.shape[0] != beta.shape[0]:
+        raise ValueError('Unequal length input arrays')   
 
     cdef int N = alpha.shape[0]-1
     cdef np.ndarray[DTYPE_t,ndim=1] x

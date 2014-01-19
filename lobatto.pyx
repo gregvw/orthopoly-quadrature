@@ -33,7 +33,12 @@ def lobatto(np.ndarray[DTYPE_t,ndim=1] alpha,
         by Gene Golub, SIAM Review Vol 15, No. 2, April 1973, 
         pp.318--334
     """
-
+    if alpha.shape[0] != beta.shape[0]:
+        raise ValueError('Unequal length input arrays')    
+ 
+    if xl1 == xl2:
+        raise ValueError('Specified points must be distinct')
+ 
     cdef int N = alpha.shape[0]-1
     cdef np.ndarray[DTYPE_t,ndim=1] en
     cdef np.ndarray[DTYPE_t,ndim=2] A1

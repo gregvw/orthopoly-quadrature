@@ -36,6 +36,17 @@ def rec_jacobi01(int N, double a, double b):
     cdef np.ndarray[DTYPE_t,ndim=1] alpha01 = np.zeros(N)
     cdef np.ndarray[DTYPE_t,ndim=1] beta01 = np.zeros(N)
 
+    if a <= -1 or b <= -1:
+        raise ValueError('''Jacobi coefficients are defined only 
+                            for alpha,beta > -1''')
+
+    if not isinstance(N,int):
+        raise TypeError('N must be an integer')
+
+    if N<1:
+        raise ValueError('N must be at least 1')
+
+
     alpha,beta = rec_jacobi(N,a,b)
     alpha01 = 0.5*(1.0+alpha)    
     beta01 = 0.25*beta

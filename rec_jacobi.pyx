@@ -38,6 +38,17 @@ def rec_jacobi(int N, double a, double b):
     cdef np.ndarray[DTYPE_t,ndim=1] n = np.arange(1.0,N)
     cdef np.ndarray[DTYPE_t,ndim=1] nab =  2.0*n+a+b
 
+    if a <= -1 or b <= -1:
+        raise ValueError('''Jacobi coefficients are defined only 
+                            for alpha,beta > -1''')
+
+    if not isinstance(N,int):
+        raise TypeError('N must be an integer')
+
+    if N<1:
+        raise ValueError('N must be at least 1')     
+
+
     mu = 2.0**(a+b+1.0)*gamma(a+1.0)*gamma(b+1.0)/gamma(a+b+2.0)
     nu = (b-a)/(a+b+2.0)
         
